@@ -125,7 +125,7 @@ spokenweb.controller("viewController", function ($scope, $filter, ViewService, V
         : '"'+title+'."';
         publicationDate+=".";
         access+=".";
-        uri= "http://soundingtennyson.org/"+uri+".";
+        uri= "https://soundingtennyson.org/"+uri+".";
         return [author,title,publicationDate,access,uri].join(" ");
     };
     angular.forEach(RESOURCES,function(r){

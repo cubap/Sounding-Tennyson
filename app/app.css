@@ -1,6 +1,6 @@
 /** Colours
  * University of Lincoln - blue
- * http://www.lincoln.ac.uk/home/abouttheuniversity/press/identity/colours/
+ * https://www.lincoln.ac.uk/home/abouttheuniversity/press/identity/colours/
  * RGB - 0 50 95
  * Hex - #002147 light #91B9A4 grey #747678
  * accent - RGB - 193 0 118 Hex - #CC3366
@@ -49,7 +49,7 @@ a[target='_blank']:not(.no-link)::after{
     word-wrap: break-word;
 }
 ul.diamond {
-    list-style-image: url("http://165.134.241.141/sounding/app/lib/diamond-12.gif");
+    list-style-image: url("https://165.134.241.141/sounding/app/lib/diamond-12.gif");
 }
 ul.citationList,.citation{
     text-indent: -2em;

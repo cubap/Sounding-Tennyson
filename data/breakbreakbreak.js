@@ -15,7 +15,7 @@ spokenweb.value('RESOURCES', [{
 spokenweb.value('MANIFESTS', [
 {
   "@id": "SGWU-Manifest",
-  "@context": "http://iiif.io/api/presentation/2/context.json",
+  "@context": "https://iiif.io/api/presentation/2/context.json",
         "@type": "sc:Manifest",
         "label": 'John Wieners at SGWU, 1966',
         "description": 'John Wieners reads from Ace of Pentacles (1974), Autumn in New York (published in 1985 as Selected Poems, 1958-1984).',
