@@ -1,6 +1,6 @@
 /* global angular */
 
-sounding.value("ViewValues", {
+spokenweb.value("ViewValues", {
     currentTime: {},
     // default setup for Break, Break, Break
     showManuscripts: [
@@ -11,7 +11,7 @@ sounding.value("ViewValues", {
         }
     ],
 });
-sounding.service("ViewService", function ($http, $q,ViewValues,$filter) {
+spokenweb.service("ViewService", function ($http, $q,ViewValues,$filter) {
     var service = this;
     this.fetchManifest = function (url) {
         return $http.get(url);
@@ -33,7 +33,7 @@ sounding.service("ViewService", function ($http, $q,ViewValues,$filter) {
     };
     ViewValues.todayString = $filter('date')(Date.now(), 'dd MMMM yyyy');
 });
-sounding.directive('xmlDiv', function ($sce, ViewService) {
+spokenweb.directive('xmlDiv', function ($sce, ViewService) {
     return {
         restrict: 'E',
         scope: {
@@ -62,7 +62,7 @@ sounding.directive('xmlDiv', function ($sce, ViewService) {
         }
     };
 });
-sounding.directive('scCanvas', function (ViewValues, ViewService) {
+spokenweb.directive('scCanvas', function (ViewValues, ViewService) {
     function updateCanvas (scope){
             var newSelection = [];
             angular.forEach(ViewValues.manifest.sequences[0].canvases, function(c, $index){
@@ -94,7 +94,7 @@ sounding.directive('scCanvas', function (ViewValues, ViewService) {
     };
 });
 
-sounding.controller("viewController", function ($scope, $filter, ViewService, ViewValues, Lists, MANIFESTS, RESOURCES, ANNOTATIONS, TEXT, $cacheFactory, RERUM, $rootScope) {
+spokenweb.controller("viewController", function ($scope, $filter, ViewService, ViewValues, Lists, MANIFESTS, RESOURCES, ANNOTATIONS, TEXT, $cacheFactory, RERUM, $rootScope) {
     $scope.Lists = Lists;
     $scope.vv = ViewValues;
     $scope.manifests = MANIFESTS;
@@ -136,7 +136,7 @@ sounding.controller("viewController", function ($scope, $filter, ViewService, Vi
     $scope.text = TEXT;
     var textCache = $cacheFactory.get('textCache') || $cacheFactory('textCache');
     if (!ViewValues.manifest) {
-        ViewValues.manifest = MANIFESTS[2];
+        ViewValues.manifest = MANIFESTS[0];
     }
     $scope.rerum = RERUM;
     /**
@@ -397,7 +397,7 @@ sounding.controller("viewController", function ($scope, $filter, ViewService, Vi
                                 var pos = _con[1].split(",");
                                 rows.push({
                                     mid: _ton,
-                                    label: _con[0],
+                                    label: a.label || _con[0],
                                     selector: _con[0] + "#xywh=0," + pos[1] + "," + canvas.width + "," + pos[3]
                                 });
                                 break;
@@ -492,7 +492,7 @@ sounding.controller("viewController", function ($scope, $filter, ViewService, Vi
         });
     });
 });
-sounding.directive('revealAnnotations', function (ViewValues, $document) {
+spokenweb.directive('revealAnnotations', function (ViewValues, $document) {
     return {
         restrict: 'A',
         link: function ($scope, $element) {

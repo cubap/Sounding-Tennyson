@@ -1,6 +1,6 @@
 /**
  * @author cubap@slu.edu
- * @file Main AngularJS application and routing for Sounding Tennyson
+ * @file Main AngularJS application and routing for spokenweb Tennyson
  * @copyright Copyright 2015 Saint Louis University
  * @disclaimer Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an "AS IS"
@@ -21,7 +21,7 @@ function authorize ($route) {
 }
 ;
 
-var sounding = angular.module('sounding',
+var spokenweb = angular.module('spokenweb',
     ['ui.bootstrap', 'ngRoute', 'ngAnimate', 'ngSanitize', 'utils', 'ui.sortable', 'angular-loading-bar', 'wavesurfer'])
     .config(['$routeProvider',
         function ($routeProvider, $locationProvider, Edition) {
@@ -59,9 +59,6 @@ var sounding = angular.module('sounding',
                             ViewValues.manifest = (m)
                                 ? RERUM.getResource(m)
                                 : MANIFESTS[0]; // default
-                            ga('set', 'page', '/viewManuscript.html');
-                            ga('send', 'pageview');
-                            ga('send', 'event', 'Manuscript', 'view', 'itemID', ViewValues.manifest['@id']);
                             if (t) {
                                 ViewValues.currentTime[ViewValues.manifest.resources[0]] = parseFloat(t);
                             }
@@ -89,9 +86,6 @@ var sounding = angular.module('sounding',
                             if(!angular.isObject(ViewValues.recording)){
                                 ViewValues.recording = RESOURCES[0];
                             }
-                            ga('set', 'page', '/viewAudio.html');
-                            ga('send', 'pageview');
-                            ga('send', 'event', 'Recording', 'view', 'itemID', ViewValues.recording['@id']);
                             if (t) {
                                 ViewValues.currentTime[ViewValues.recording['@id']] = parseFloat(t);
                             }
@@ -108,8 +102,6 @@ var sounding = angular.module('sounding',
                     controller: 'viewController',
                     resolve: {
                         tracker: function () {
-                            ga('set', 'page', '/about.html');
-                            ga('send', 'pageview');
                         }
                     }
                 })
@@ -118,8 +110,6 @@ var sounding = angular.module('sounding',
                     controller: 'viewController',
                     resolve: {
                         tracker: function () {
-                            ga('set', 'page', '/acknowledgment.html');
-                            ga('send', 'pageview');
                         }
                     }
                 })
@@ -128,8 +118,6 @@ var sounding = angular.module('sounding',
                     controller: 'viewController',
                     resolve: {
                         tracker: function () {
-                            ga('set', 'page', '/permissions.html');
-                            ga('send', 'pageview');
                         }
                     }
                 })
@@ -138,8 +126,6 @@ var sounding = angular.module('sounding',
                     controller: 'viewController',
                     resolve: {
                         tracker: function () {
-                            ga('set', 'page', '/funding.html');
-                            ga('send', 'pageview');
                         }
                     }
                 })
@@ -148,8 +134,6 @@ var sounding = angular.module('sounding',
                     controller: 'viewController',
                     resolve: {
                         tracker: function () {
-                            ga('set', 'page', '/glossary.html');
-                            ga('send', 'pageview');
                         }
                     }
                 })
@@ -158,8 +142,6 @@ var sounding = angular.module('sounding',
                     controller: 'viewController',
                     resolve: {
                         tracker: function () {
-                            ga('set', 'page', '/history.html');
-                            ga('send', 'pageview');
                         }
                     }
                 })
@@ -168,8 +150,6 @@ var sounding = angular.module('sounding',
                     controller: 'viewController',
                     resolve: {
                         tracker: function () {
-                            ga('set', 'page', '/team.html');
-                            ga('send', 'pageview');
                         }
                     }
                 })
@@ -215,8 +195,6 @@ var sounding = angular.module('sounding',
 //                            {label: "Annotations", list: [ANNOTATIONS[0]]}
                         ];
 
-                        ga('set', 'page', '/archive.html');
-                        ga('send', 'pageview');
                     }
                 })
                 .when('/music', {
@@ -234,8 +212,6 @@ var sounding = angular.module('sounding',
                             });
                         });
                         $scope.Lists = Lists;
-                        ga('set', 'page', '/music.html');
-                        ga('send', 'pageview');
                     }
                 })
                 .when('/essays', {
@@ -252,8 +228,6 @@ var sounding = angular.module('sounding',
                                 list: [ESSAYS[1], ESSAYS[3]]
                             }
                         ];
-                        ga('set', 'page', '/essays.html');
-                        ga('send', 'pageview');
                     }
                 })
                 .when('/summary/:id', {
@@ -273,9 +247,6 @@ var sounding = angular.module('sounding',
                             ViewValues.annotation = (a)
                                 ? RERUM.getResource(a)
                                 : ANNOTATIONS[0]; // default to Break, Break observation
-                            ga('set', 'page', '/viewAnnotation.html');
-                            ga('send', 'pageview');
-                            ga('send', 'event', 'Annotation', 'view', 'itemID', ViewValues.annotation['@id']);
                         }
                     }
                 })
@@ -283,10 +254,10 @@ var sounding = angular.module('sounding',
                     redirectTo: '404'
                 }));
         }]);
-sounding.controller('mainController', function ($scope, ViewValues) {
+spokenweb.controller('mainController', function ($scope, ViewValues) {
 });
 
-sounding.directive('stFooter', function () {
+spokenweb.directive('stFooter', function () {
     return {
         restrict: 'E',
         templateUrl: 'app/components/footer.html'

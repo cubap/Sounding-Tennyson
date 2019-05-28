@@ -54,7 +54,7 @@ class="btn btn-primary" tooltip="Show only the manuscript">
 class="btn btn-info btn-block btn-responsive">
 <i class="fa fa-info-circle"></i>
 Metadata</button>
-<div class="metadata well" collapse="!vv.showData[vv.manifest['@id']]">
+<div class="metadata well" collapse="vv.showData[vv.manifest['@id']]">
 <dl ng-class="{'dl-horizontal':!vv.showWav}">
     <span ng-repeat="m in vv.manifest.metadata">
     <dt ng-repeat-start="(key,value) in m" title={{key}}>{{key}}</dt>
@@ -72,12 +72,7 @@ Metadata</button>
 <div class="col-sm-6" ng-class="{'col-sm-3':!vv.showWav}" ng-repeat="m in vv.manifest.resources"
 ng-show="thisOn(vv.manifest.resources,music['@id'])"
 ng-init="music=rerum.getResource(m);windex=$index;">
-    <button ng-click="vv.showWav[music['@id']]=true;ga('send', 'event','Music','request','itemID',music['@id']);" ng-if="!vv.showWav[music['@id']]"
-            class="btn btn-default btn-block btn-responsive">
-    <span class="help-block"> <i class="fa fa-music"></i> Load audio file and interactive media</span>
-    {{music.label||'Music'}}</button>
-    <wavesurfer ng-if="vv.showWav[music['@id']]"
-                ng-attr-url="{{music.resource['@id']}}"
+    <wavesurfer ng-attr-url="{{music.resource['@id']}}"
 wave-color="#333"
 progress-color="#002147"
 min-px-per-sec=1>
@@ -95,28 +90,10 @@ min-px-per-sec=1>
         </div>
     </wavesurfer>
 <div ng-controller="viewController">
-<card ng-repeat="line in vv.lines[vv.manifest.resources[windex]]"
- ng-if="vv.showWav[music['@id']]"
- ng-show="(line.selector.indexOf(vv.manifest.sequences[0].canvases[vv.selectedCanvas]['@id']) === -1 ) && thisOn(vv.manifest.resources,line.mid[0]).length && inTime(line.mid.join('#t='))">
-<a ng-click="pickM(rerum.getResource(findManifest(line.label,'@id')))">
-    <span ng-bind-html="findManifest(line.label,'label')"></span>
-<img selector="line.selector" width="100%"></a>
+<card ng-repeat="line in vv.lines[vv.manifest.resources[windex]]">
+<a ng-click="seekTo(line.mid.join('#t='))">
+    ({{line.mid[1].split(",").join("-")}}s) {{line.label}}
 </card>
 </div>
-
-    <!--    Thanks, Augmented Notes! The code was not used here, but was useful in the preparation of the musical annotations.
-    <a class="license" rel="license" href="http://creativecommons.org/licenses/by/3.0/">
-        <img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png">
-    </a>
-    <a class="augnotes-badge" href="http://www.augmentednotes.com">
-        <img alt="Powered by Augmented Notes" style="border-width:0" src="media/augnotes_badge.png" width="85px">
-    </a>
-    -->
-
 </div>
-<script>
-    ga('ec:addImpression', {'name': vv.manifest['@id']});
-    ga('set', 'page', '/viewManifest.html');
-    ga('send', 'pageview');
-</script>
 </div>

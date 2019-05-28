@@ -54,7 +54,6 @@ angular.module('wavesurfer', [])
             $scope.wavesurfer.on('ready', function () {
                 $scope.wavesurfer.ready = true;
                 ViewValues.currentTime[$scope.music['@id']] = $scope.wavesurfer.getCurrentTime();
-                ga('send', 'event', 'Music', 'ready', 'itemID', $scope.music['@id']);
                 $scope.$apply();
             });
             $scope.wavesurfer.on('play', function () {
@@ -75,7 +74,6 @@ angular.module('wavesurfer', [])
                 $scope.$evalAsync(function () {
                     var mark = progress * $scope.wavesurfer.getDuration();
                     ViewValues.currentTime[$scope.m] = mark;
-                    ga('send', 'event', 'Music', 'seek', 'mark', $scope.music['@id'] + "#t=" + mark);
                 });
             });
 
@@ -89,7 +87,6 @@ angular.module('wavesurfer', [])
                     mark = parseFloat(mark);
                     $scope.wavesurfer.seekTo(mark / $scope.wavesurfer.getDuration());
                     ViewValues.currentTime[id] = mark;
-                    ga('send', 'event', 'Music', 'seek', 'mark', $scope.music['@id'] + "#t=" + mark);
                 }
             });
 

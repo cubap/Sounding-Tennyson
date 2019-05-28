@@ -1,7 +1,7 @@
 
-/* global angular, sounding */
+/* global angular, spokenweb */
 
-sounding.controller('makeAnnotationController', function ($scope, ViewValues, ViewService, MANIFESTS) {
+spokenweb.controller('makeAnnotationController', function ($scope, ViewValues, ViewService, MANIFESTS) {
     $scope.manifests = MANIFESTS;
 // Load dummy data or import from augmented_notes_data
     var augmented_notes_data = {
@@ -57,7 +57,7 @@ sounding.controller('makeAnnotationController', function ($scope, ViewValues, Vi
     };
 });
 
-sounding.directive('drawBox', function () {
+spokenweb.directive('drawBox', function () {
     return {
         restrict: 'A',
         link: function ($scope, $element, $attrs) {
@@ -110,7 +110,7 @@ sounding.directive('drawBox', function () {
     };
 });
 
-sounding.directive('selector', function () {
+spokenweb.directive('selector', function () {
     return {
         scope: {
             selector: "=",

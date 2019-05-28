@@ -41,8 +41,7 @@
             <textarea class="form-control" ng-model='pageText'></textarea>
             <button class="btn btn-default" ng-click='parseAnnotations(pageText)'>Send it!</button>
         </div>
-        <div class="panel panel-default" ng-repeat="a in vv.annotating.otherContent[1]['@list']"
-             ng-show="vv.currentTime >= inTime(a.on[1])[0] && vv.currentTime < inTime(a.on[1])[1]">
+        <div class="panel panel-default" ng-repeat="a in vv.annotating.otherContent[1]['@list']">
             <div class="form-group panel-body">
                 <label class="control-label">Label</label>
                 <input class="form-control" type="text" ng-model="a.label" placeholder="Optional Label">
