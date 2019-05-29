@@ -1,0 +1,60 @@
+https://montreal.spokenweb.ca/wp-json/sgw-poetry-readings/list
+<!DOCTYPE html>
+<!--
+author: Patrick Cuba <cubap@slu.edu>
+-->
+<html>
+
+<head>
+    <title>SpokenWeb DEER Demo</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/chota@latest">
+</head>
+
+<body>
+    <nav class="nav"></nav>
+    <div class="container row">
+        <deer-view class="col-4" id="list" deer-list="urls" deer-template="speaklist" deer-id="https://montreal.spokenweb.ca/wp-json/sgw-poetry-readings/list">
+        </deer-view>
+        <deer-view class="col-8" deer-listening="list" deer-template="entity"></deer-view>
+    </div>
+    <script type="module">
+        // src="https://centerForDigitalHumanities.github.io/deer/js/deer.js" 
+        // Identify an alternate config location or only overwrite some items below.
+        import { default as DEER } from 'https://centerfordigitalhumanities.github.io/deer/js/deer-config.js'
+
+        DEER.TEMPLATES.speaklist = (obj, options={}) => {
+            let tmpl = `<h2>SGW Poetry Reading Series</h2>`
+            if(options.list){
+                tmpl += `<ul>`
+                obj[options.list].forEach((val,index)=>{
+                    let name = val.title
+                    tmpl+= (val.json_url && options.link) ? `<li ${DEER.ID}="${val.json_url}"><a href="${options.link}${val.json_url}">${name}</a></li>` : `<li ${DEER.ID}="${val.json_url}">${name}</li>`
+                })
+                tmpl += `</ul>`
+            }
+            return tmpl
+        }
+
+        // Render is probably needed by all items, but can be removed.
+        // CDN at https://centerfordigitalhumanities.github.io/deer/releases/
+        import { default as renderer, initializeDeerViews } from 'https://centerfordigitalhumanities.github.io/deer/js/deer-render.js'
+
+        // Record is only needed for saving or updating items.
+        // CDN at https://centerfordigitalhumanities.github.io/deer/releases/
+        import { default as record, initializeDeerForms } from 'https://centerfordigitalhumanities.github.io/deer/js/deer-record.js'
+
+        // fire up the element detection as needed
+        try {
+            initializeDeerViews(DEER) 
+            initializeDeerForms(DEER)
+        } catch (err) {
+            // silently fail if render or record is not loaded
+        }
+
+    </script>
+</body>
+
+</html>
